@@ -8,13 +8,13 @@ import { async } from '@firebase/util'
 const MySwal = withReactContent(Swal)
 
 const Show = () => {
-  //1 - configuramos los hooks
+  //configuramos los hooks
   const [products, setProducts] = useState( [] )
 
-  //2 - referenciamos a la DB firestore
+  //referenciamos a la DB firestore
   const productsCollection = collection(db, "products")
 
-  //3 - Funcion para mostrar TODOS los docs
+  //Funcion para mostrar TODOS los docs
   const getProducts = async ()   => {
    const data = await getDocs(productsCollection)
    //console.log(data.docs)
@@ -23,54 +23,54 @@ const Show = () => {
    )
    //console.log(products)
   }
-  //4 - Funcion para eliminar un doc
+  //Funcion para eliminar un doc
   const deleteProduct = async (id) => {
    const productDoc = doc(db, "products", id)
    await deleteDoc(productDoc)
    getProducts()
   }
-  //5 - Funcion de confirmacion para Sweet Alert 2
+  //Funcion de confirmacion para Sweet Alert 2
   const confirmDelete = (id) => {
     MySwal.fire({
       title: '¿Elimina el producto?',
-      text: "You won't be able to revert this!",
+      text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) { 
         //llamamos a la fcion para eliminar   
         deleteProduct(id)               
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
+          'Eliminar!',
+          'El archivo se elimino correctamente.',
+          'Exitosamente'
         )
       }
     })    
   }
-  //6 - usamos useEffect
+  //usamos useEffect
   useEffect( () => {
     getProducts()
     // eslint-disable-next-line
   }, [] )
-  //7 - devolvemos vista de nuestro componente
+  //devolvemos vista de nuestro componente
   return (
     <>
     <div className='container'>
       <div className='row'>
         <div className='col'>
           <div className="d-grid gap-2">
-            <Link to="/create" className='btn btn-secondary mt-2 mb-2'>Create</Link>    
+            <Link to="/create" className='btn btn-info mt-2 mb-2'>Crear</Link>    
           </div>
-          <table className='table table-dark table-hover'>
+          <table className='table table-success table-hover'>
             <thead>
               <tr>
-                <th>Description</th>
+                <th>Descripción</th>
                 <th>Stock</th>
-                <th>Actions</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>

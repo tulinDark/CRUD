@@ -1,5 +1,4 @@
 import './App.css';
-//importamos nuestros componentes
 import Show from './components/Show';
 import Create from './components/Create';
 import Edit from './components/Edit';
