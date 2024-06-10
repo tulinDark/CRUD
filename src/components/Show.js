@@ -14,7 +14,7 @@ const Show = () => {
   //referenciamos a la DB firestore
   const productsCollection = collection(db, "products")
 
-  //Funcion para mostrar TODOS los docs
+  
   const getProducts = async ()   => {
    const data = await getDocs(productsCollection)
    //console.log(data.docs)
